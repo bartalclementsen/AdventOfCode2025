@@ -72,6 +72,6 @@ public class SolverTests
         string result = unit.Solve2(input);
 
         // Assert
-        Assert.Equal("NotImplemented", result);
+        Assert.Equal("172740584266849", result);
     }
 }
