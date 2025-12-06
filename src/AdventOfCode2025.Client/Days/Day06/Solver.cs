@@ -1,13 +1,9 @@
-﻿
-using System.Linq.Expressions;
-using System.Text;
-
-namespace AdventOfCode2025.Client.Days.Day06;
+﻿namespace AdventOfCode2025.Client.Days.Day06;
 
 public class Solver : SolverBase
 {
     public override string Solve1(IEnumerable<string> inputs)
-    { 
+    {
 
         List<Problem> problems = [];
         foreach (string input in inputs)
@@ -52,22 +48,18 @@ public class Solver : SolverBase
     public override string Solve2(IEnumerable<string> inputs)
     {
         List<Problem> problems = [];
-
-        StringBuilder sb = new();
         int height = inputs.Count();
         int width = inputs.First().Length;
-        char[,] array = new char[height, width];
         Problem problem = new();
         problems.Add(problem);
-        
+
         for (int i = width - 1; i >= 0; i--)
         {
-            bool emptyLine = true;
-            string number = "";
-
+            bool isEmptyLine = true;
+            string currentNumber = "";
             for (int j = 0; j < height; j++)
             {
-                if(j >= inputs.Count())
+                if (j >= inputs.Count())
                 {
                     continue;
                 }
@@ -77,9 +69,8 @@ public class Solver : SolverBase
                 {
                     continue;
                 }
-                var element = input[i];
-                //array[i, j] = element;
 
+                char element = input[i];
                 if (element == ' ')
                 {
                     // skip
@@ -87,12 +78,12 @@ public class Solver : SolverBase
                 }
                 else if (char.IsDigit(element))
                 {
-                    emptyLine = false;
-                    number = number + element.ToString();
+                    isEmptyLine = false;
+                    currentNumber += element.ToString();
                 }
                 else
                 {
-                    emptyLine = false;
+                    isEmptyLine = false;
                     problem.AddOperation(element switch
                     {
                         '+' => Operation.Add,
@@ -102,21 +93,16 @@ public class Solver : SolverBase
                 }
             }
 
-            if(!emptyLine)
+            if (!isEmptyLine)
             {
-                problem.AddNumber(long.Parse(number));
+                problem.AddNumber(long.Parse(currentNumber));
             }
             else
             {
                 problem = new Problem();
                 problems.Add(problem);
             }
-
-            sb.AppendLine();
         }
-
-        var s = sb.ToString();
-
 
         return problems.Sum(o => o.Solve()).ToString();
     }
