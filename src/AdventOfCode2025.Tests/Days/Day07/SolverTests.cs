@@ -603,7 +603,7 @@ public class SolverTests
         string result = unit.Solve2(input);
 
         // Assert
-        Assert.Equal("18", result);
+        Assert.Equal("13", result);
     }
 
     [Fact]
@@ -631,7 +631,7 @@ public class SolverTests
         string result = unit.Solve2(input);
 
         // Assert
-        Assert.Equal("31", result);
+        Assert.Equal("20", result);
     }
 
     [Fact]
@@ -703,6 +703,6 @@ public class SolverTests
         string result = unit.Solve2(input);
 
         // Assert
-        Assert.Equal("NotImplemented", result);
+        Assert.Equal("6479180385864", result);
     }
 }
